@@ -1,0 +1,26 @@
+{
+    "name": "easy-ideal",
+    "version": "0.0.0",
+    "description": "Qantani Easy iDeal API client for Node (unofficial).",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/Jarvix/node-easy-ideal"
+    },
+    "keywords": [
+        "qantani",
+        "easy-ideal",
+        "ideal",
+        "payment",
+        "service"
+    ],
+    "author": "Jarvix",
+    "license": "BSD",
+    "bugs": {
+        "url": "https://github.com/Jarvix/node-easy-ideal/issues"
+    },
+    "homepage": "https://github.com/Jarvix/node-easy-ideal"
+}
