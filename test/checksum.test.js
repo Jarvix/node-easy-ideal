@@ -14,7 +14,7 @@ function createClient() {
     });
 }
 
-function testSimpleChecksum() {
+(function testSimpleChecksum() {
     var easyideal = createClient();
 
     var checksum = easyideal._checksum({
@@ -26,9 +26,9 @@ function testSimpleChecksum() {
     });
 
     assert.equal(checksum, '434c7a1599118ef14d0f2aa1811c7a48a1a5371b');
-}
+})();
 
-function testEmptyData() {
+(function testEmptyData() {
     var easyideal = createClient();
 
     // Generate checksum
@@ -39,7 +39,4 @@ function testEmptyData() {
     shasum.update('12345');
 
     assert.equal(checksum, shasum.digest('hex'));
-}
-
-testSimpleChecksum();
-testEmptyData();
+}());

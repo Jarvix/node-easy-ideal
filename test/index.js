@@ -1,2 +1,3 @@
-var checksum = require('./checksum'),
-    simple = require('./simple-test');
+require('./checksum.test');
+require('./simple.test');
+require('./xmlgen.test');
