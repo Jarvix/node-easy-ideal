@@ -5,6 +5,18 @@ var xmlgen = require('../lib/xmlgen'),
     assert = require('assert');
 
 describe('XML generator', function () {
+    it('should throw an error if root is not an object', function () {
+        assert.throws(function () {
+            xmlgen(5)
+        }, Error);
+        assert.throws(function () {
+            xmlgen('')
+        }, Error);
+        assert.throws(function () {
+            xmlgen([])
+        }, Error);
+    });
+
     describe('Leaf elements', function () {
         it('should output a single element with contents', function () {
             assert.equal('<foo>bar</foo>', xmlgen({
@@ -72,19 +84,17 @@ describe('XML generator', function () {
                 declaration: true
             }));
         });
-        it('should use declaration options', function () {});
-    });
-
-    it('should throw an error if root is not an object', function () {
-        assert.throws(function () {
-            xmlgen(5)
-        }, Error);
-        assert.throws(function () {
-            xmlgen('')
-        }, Error);
-        assert.throws(function () {
-            xmlgen([])
-        }, Error);
+        it('should use declaration options', function () {
+            assert.equal('<?xml version="1.0" encoding="UTF-16" standalone="yes"?><foo>bar</foo>',
+                xmlgen({
+                    foo: 'bar'
+                }, {
+                    declaration: {
+                        standalone: 'yes',
+                        encoding: 'UTF-16'
+                    }
+                }));
+        });
     });
 
     describe('Tree', function () {
