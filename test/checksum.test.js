@@ -1,42 +1,38 @@
+/* global describe, it */
 'use strict';
 
-var EasyIdeal = require('../lib/easyideal'),
+var checksum = require('../lib/checksum'),
     assert = require('assert'),
     crypto = require('crypto');
 
-function createClient() {
-    return new EasyIdeal({
-        merchant: {
-            id: 'SomeId',
-            key: 'MyKey',
-            secret: '12345'
-        }
-    });
-}
-
-(function testSimpleChecksum() {
-    var easyideal = createClient();
-
-    var checksum = easyideal._checksum({
-        Amount: 9.95,
-        Bank: 'ABN_AMRO',
-        Return: 'http://www.mijnwebsite.nl/bedankt.php',
-        Description: 'Testbetaling',
-        Currency: 'EUR'
+describe('Checksum function', function () {
+    it('should generate a correct checksum', function () {
+        assert.equal('434c7a1599118ef14d0f2aa1811c7a48a1a5371b', checksum({
+            Amount: 9.95,
+            Bank: 'ABN_AMRO',
+            Return: 'http://www.mijnwebsite.nl/bedankt.php',
+            Description: 'Testbetaling',
+            Currency: 'EUR'
+        }, '12345'));
     });
 
-    assert.equal(checksum, '434c7a1599118ef14d0f2aa1811c7a48a1a5371b');
-})();
+    it('should generate a correct checksum when no data supplied', function () {
+        // Create shasum to test against
+        var shasum = crypto.createHash('sha1');
+        shasum.update('12345');
 
-(function testEmptyData() {
-    var easyideal = createClient();
+        assert.equal(checksum({}, '12345'), shasum.digest('hex'));
+    });
 
-    // Generate checksum
-    var checksum = easyideal._checksum({});
+    it('should throw an error if input is not an object', function () {
+        assert.throws(function () {
+            checksum(null, '12345');
+        }, Error);
+    });
 
-    // Create shasum to test against
-    var shasum = crypto.createHash('sha1');
-    shasum.update('12345');
-
-    assert.equal(checksum, shasum.digest('hex'));
-}());
+    it('should throw an error if no merchant secret is supplied', function () {
+        assert.throws(function () {
+            checksum({});
+        }, Error);
+    });
+});
