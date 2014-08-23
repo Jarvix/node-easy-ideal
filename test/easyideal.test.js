@@ -7,6 +7,7 @@ var EasyIdeal = require('../lib/easyideal'),
 describe('Easy Ideal', function () {
     describe('#banks()', function () {
         it('should do stuff', function (done) {
+            this.timeout(5000);
             var easyideal = new EasyIdeal({
                 merchant: {
                     id: 'A',
