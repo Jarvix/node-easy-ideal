@@ -4,17 +4,22 @@
 var EasyIdeal = require('../lib/easyideal'),
     assert = require('assert');
 
+function createIdeal() {
+    return new EasyIdeal({
+        merchant: {
+            id: '',
+            key: '',
+            secret: ''
+        }
+    });
+}
+
 describe('Easy Ideal', function () {
     describe('#banks()', function () {
+        var easyideal = createIdeal();
+
         it.skip('should do stuff', function (done) {
             this.timeout(5000);
-            var easyideal = new EasyIdeal({
-                merchant: {
-                    id: '',
-                    key: '',
-                    secret: ''
-                }
-            });
 
             easyideal.banks(function (err, results) {
                 if (err)
@@ -25,15 +30,10 @@ describe('Easy Ideal', function () {
     });
 
     describe('#execute()', function () {
+        var easyideal = createIdeal();
+
         it.skip('should do stuff', function (done) {
             this.timeout(5000);
-            var easyideal = new EasyIdeal({
-                merchant: {
-                    id: '',
-                    key: '',
-                    secret: ''
-                }
-            });
 
             var transaction = {
                 amount: 8,
@@ -47,8 +47,40 @@ describe('Easy Ideal', function () {
                 if (err)
                     throw err;
 
+                console.log('ID: ', easyideal.lastTransactionId, 'Code: ', easyideal.lastTransactionCode)
+                console.log(bankurl);
+
                 done();
             });
         });
     });
+
+    describe('#getPaymentStatus', function () {
+        var easyideal = createIdeal();
+
+        it('should throw with invalid checksum', function () {
+            assert.throws(function () {
+                easyideal.getPaymentStatus('id', '1', 'salt', 'checksum', 'transactioncode');
+            }, Error);
+        })
+    });
+
+    describe('#getTransactionStatus', function () {
+        var easyideal = createIdeal();
+
+        it('should throw with invalid parameters', function () {
+            assert.throws(function () {
+                easyideal.getTransactionStatus(null, null, null);
+            }, Error);
+        })
+
+        it.skip('it should do stuff', function (done) {
+            easyideal.getTransactionStatus('', '', function (
+                err, res) {
+                console.log(err, res);
+                done(err);
+            });
+        });
+    });
+
 });
