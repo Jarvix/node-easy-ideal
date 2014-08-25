@@ -5,8 +5,8 @@ var EasyIdeal = require('../lib/easyideal'),
     assert = require('assert');
 
 describe('Easy Ideal', function () {
-    describe.skip('#banks()', function () {
-        it('should do stuff', function (done) {
+    describe('#banks()', function () {
+        it.skip('should do stuff', function (done) {
             this.timeout(5000);
             var easyideal = new EasyIdeal({
                 merchant: {
@@ -24,8 +24,8 @@ describe('Easy Ideal', function () {
         });
     });
 
-    describe.skip('#execute()', function () {
-        it('should do stuff', function (done) {
+    describe('#execute()', function () {
+        it.skip('should do stuff', function (done) {
             this.timeout(5000);
             var easyideal = new EasyIdeal({
                 merchant: {
