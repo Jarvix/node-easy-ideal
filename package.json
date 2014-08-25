@@ -25,7 +25,8 @@
   "homepage": "https://github.com/Jarvix/node-easy-ideal",
   "dependencies": {
     "async": "~0.9.0",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "requestify": "^0.1.16"
   },
   "devDependencies": {
     "mocha": "^1.21.4"
