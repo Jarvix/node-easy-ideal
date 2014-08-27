@@ -1,6 +1,6 @@
 {
   "name": "easy-ideal",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Qantani Easy iDeal API client for Node (unofficial).",
   "main": "lib/easyideal.js",
   "scripts": {
@@ -17,7 +17,7 @@
     "payment",
     "service"
   ],
-  "author": "Jarvix",
+  "author": "Jos Kuijpers",
   "license": "BSD",
   "bugs": {
     "url": "https://github.com/Jarvix/node-easy-ideal/issues"
