@@ -1,6 +1,6 @@
 {
   "name": "easy-ideal",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Qantani Easy iDeal API client for Node (unofficial).",
   "main": "lib/easyideal.js",
   "scripts": {
