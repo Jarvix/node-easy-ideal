@@ -5,11 +5,100 @@ node-easy-ideal
 
 Qantani Easy iDeal API client for Node (unofficial)
 
+## Getting Started ##
+
+Install using npm
+```bash
+$ npm install easy-ideal
+```
+
+Import the library
+```js
+var EasyIdeal = require('easy-ideal');
+```
+
+Create an easy ideal instance.
+```js
+var easyideal = new EasyIdeal({
+  merchant: {
+    id: YOUR_MERCHANT_ID,
+    key: YOUR_MERCHANT_KEY,
+    secret: YOUR_MERCHANT_SECRET
+  }
+});
+```
+
+### Acquiring a list of banks ###
+
+```js
+easyideal.banks(function(error,banks) {
+  if(error)
+    throw error;
+  console.log(banks);
+});
+```
+Outputs:
+```js
+[
+  {
+    id: 'ING',
+    name: 'ING'
+  },
+  {
+    id: 'RABOBANK',
+    name: 'Rabobank'
+  },
+  ...
+]
+```
+You should cache this output with a TTL of 2 days.
+
+### Executing a transaction ###
+
+```js
+var transaction = {
+  amount: 10.0,
+  currency: 'EUR',
+  description: 'A test transaction.',
+  return: 'http://example.com/thanks',
+  bank: 'ING'
+};
+
+easyideal.execute(transaction,function(error,info) {
+  console.log(info);
+});
+```
+
+Outputs:
+```js
+{
+  transaction: {
+    id: '124',
+    code: '12335kjhkjdg'
+  },
+  bank_url: 'https://www.qantanipayments.com/.....'
+}
+```
+
+Do not forget to store these values. You need them to respond to the Qantani callbacks.
+Note that EasyIdeal only supports transactions with EUR currency.
+
+For more information, see the documentation and the Qantani implementation manual.
+
+## Documentation ##
+
+This package supports jsdoc. Simply install jsdoc and run it
+```bash
+$ npm install -g jsdoc
+$ jsdoc -d docs
+$ open docs/index.html
+```
+
 ## License ##
 
 BSD 2-clause:
 
-```
+```text
 Copyright (c) 2014, Jos Kuijpers
 All rights reserved.
 
