@@ -47,7 +47,7 @@ describe('Easy Ideal', function () {
                 if (err)
                     throw err;
 
-                console.log('ID: ', easyideal.lastTransactionId, 'Code: ', easyideal.lastTransactionCode)
+                console.log('ID: ', easyideal.lastTransactionId, 'Code: ', easyideal.lastTransactionCode);
                 console.log(bankurl);
 
                 done();
@@ -62,7 +62,7 @@ describe('Easy Ideal', function () {
             assert.throws(function () {
                 easyideal.getPaymentStatus('id', '1', 'salt', 'checksum', 'transactioncode');
             }, Error);
-        })
+        });
     });
 
     describe('#getTransactionStatus', function () {
@@ -72,7 +72,7 @@ describe('Easy Ideal', function () {
             assert.throws(function () {
                 easyideal.getTransactionStatus(null, null, null);
             }, Error);
-        })
+        });
 
         it.skip('it should do stuff', function (done) {
             easyideal.getTransactionStatus('', '', function (

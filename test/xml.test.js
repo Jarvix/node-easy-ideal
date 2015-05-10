@@ -8,13 +8,13 @@ var xml = require('../lib/xml'),
 describe('XML generator', function () {
     it('should throw an error if root is not an object', function () {
         assert.throws(function () {
-            xmlgen(5)
+            xmlgen(5);
         }, Error);
         assert.throws(function () {
-            xmlgen('')
+            xmlgen('');
         }, Error);
         assert.throws(function () {
-            xmlgen([])
+            xmlgen([]);
         }, Error);
     });
 
@@ -77,7 +77,7 @@ describe('XML generator', function () {
                     b: ['foo', '', 'bar']
                 }
             }));
-        })
+        });
     });
 
     describe('Declaration', function () {
@@ -138,59 +138,59 @@ describe('XML generator', function () {
 describe('XML parser', function () {
     it('should throw an error if input is not a string', function () {
         assert.throws(function () {
-            xml.parse(5)
+            xml.parse(5);
         }, Error);
         assert.throws(function () {
-            xml.parse({})
+            xml.parse({});
         }, Error);
         assert.throws(function () {
-            xml.parse([])
+            xml.parse([]);
         }, Error);
     });
 
     it('should throw error if input string is empty', function () {
         assert.throws(function () {
-            var node = xml.parse('');
+            xml.parse('');
         }, Error);
         assert.throws(function () {
-            var node = xml.parse('  ');
+            xml.parse('  ');
         }, Error);
-    })
+    });
 
     it('should support declarations', function () {
         var json = xml.parse('<?xml version="1.0" ?><foo></foo>');
         assert.deepEqual(json, {
             foo: ''
         });
-    })
+    });
 
     it('should support comments', function () {
         var json = xml.parse('<!-- hello --><foo></foo><!-- world -->');
         assert.deepEqual(json, {
             foo: ''
         });
-    })
+    });
 
     it('should support tags', function () {
         var json = xml.parse('<foo></foo>');
         assert.deepEqual(json, {
             foo: ''
         });
-    })
+    });
 
     it('should support tags with text', function () {
         var json = xml.parse('<foo>hello world</foo>');
         assert.deepEqual(json, {
             foo: 'hello world'
         });
-    })
+    });
 
     it('should support weird whitespace', function () {
         var json = xml.parse('<foo \n\n\nbar\n\n=   \nbaz>\n\nhello world</\n\nfoo>');
         assert.deepEqual(json, {
             foo: 'hello world'
         });
-    })
+    });
 
     it('should support nested tags', function () {
         var json = xml.parse('<a><b><c>hello</c></b></a>');
@@ -201,7 +201,7 @@ describe('XML parser', function () {
                 }
             }
         });
-    })
+    });
 
     it('should support arrays', function () {
         var json = xml.parse('<a><b>foo</b><b>bar</b></a>');
@@ -210,7 +210,7 @@ describe('XML parser', function () {
                 b: ['foo', 'bar']
             }
         });
-    })
+    });
 
     it('should support self-closing tags', function () {
         var json = xml.parse('<a><b>foo</b><b a="bar" /><b>bar</b></a>');
@@ -219,7 +219,7 @@ describe('XML parser', function () {
                 b: ['foo', '', 'bar']
             }
         });
-    })
+    });
 });
 
 describe('XML gen & parse', function () {
